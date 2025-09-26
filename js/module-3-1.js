@@ -90,16 +90,14 @@ const array7 = [0, -5, 44, -56, -7, 8];
 // масиву наступним чином: якщо довжина рядочку менша за 6 - то привести рядок до
 // нижнього регістру, в іншому випадку привести до верхнього регістру.
 function changeCase(arr) {
-  const result = [];
   for (let i = 0; i < arr.length; i++) {
-    const el = arr[i];
-    if (el.length < 6) {
-      result.push(el.toLowerCase());
+    if (arr[i].length < 6) {
+      arr[i] = arr[i].toLowerCase();
     } else {
-      result.push(el.toUpperCase());
+      arr[i] = arr[i].toUpperCase();
     }
   }
-  return result;
+  return arr;
 }
 const array8 = ['Banana', 'CuCuMber', 'Rice', 'APPLE'];
 //console.log(changeCase(array8));
@@ -120,7 +118,7 @@ const array9 = [1, 2, 3, 4, 5, 6, 0, 7];
 
 //10. Напиши функцію, яка приймає масив чисел і повертає новий масив, де кожне
 // число помножене на індекс, за яким воно знаходиться в масиві.
-function multiplyIndex(arr) {
+function multiplyByIndex(arr) {
   const result = [];
   for (let i = 0; i < arr.length; i++) {
     result.push(arr[i] * i);
@@ -128,7 +126,7 @@ function multiplyIndex(arr) {
   return result;
 }
 const array10 = [2, 2, 2, 2, 2, 2];
-//console.log(multiplyIndex(array10));
+//console.log(multiplyByIndex(array10));
 
 // 11. Напиши функцію, яка приймає масив чисел і повертає новий масив, що містить
 // лише числа, які діляться на 3.
@@ -150,3 +148,131 @@ const array11 = [0, 2, 3, 6, 7, 9, 11];
 
 // 12. Напиши функцію яка приймає два масиви (arr1, arr2), та повертає новий масив
 // де будуть лише ті елементи які зустрічаються і в arr1 і arr2.
+function getCommonElements(arr1, arr2) {
+  let result = [];
+  for (let i = 0; i < arr1.length; i++) {
+    const el = arr1[i];
+    if (arr2.includes(el) && !result.includes(el)) {
+      result.push(el);
+    }
+  }
+  return result;
+}
+//console.log(getCommonElements(array10, array11));
+//console.log(getCommonElements(array11, array10));
+
+//13. Напиши функцію яка приймає два масиви (arr1, arr2), та повертає новий масив
+// де будуть лише елементи масиву arr1 яких не має у масиві arr2.
+function getDifferentElements(arr1, arr2) {
+  const result = [];
+  for (let i = 0; i < arr1.length; i++) {
+    const el = arr1[i];
+    if (!arr2.includes(el)) {
+      result.push(el);
+    }
+  }
+  return result;
+}
+const array12 = [`black`, `green`, `yellow`, `gray`, `blue`];
+const array13 = [`black`, `pink`, `purple`, `green`];
+//console.log(getDifferentElements(array13, array12));
+
+//14. Напиши функцію яка приймає масив та знаходить мінімальний елемент.
+function findMinElement(arr) {
+  let result = arr[0];
+  for (let i = 1; i < arr.length; i++) {
+    if (arr[i] < result) {
+      result = arr[i];
+    }
+  }
+  return result;
+}
+const array14 = [5, 2, 0, 87, 12, -2, 5, 4];
+//console.log(findMinElement(array14));
+
+//======= нові знання відкривають коротший шлях =======
+function findMinElement_2(arr) {
+  return Math.min(...arr);
+}
+//console.log(findMinElement_2(array14));
+
+//15. Напиши функцію, яка приймає масив та знаходить максимальний елемент.
+function findMaxElement(arr) {
+  let result = arr[0];
+  for (let i = 1; i < arr.length; i++) {
+    if (arr[i] > result) {
+      result = arr[i];
+    }
+  }
+  return result;
+}
+//console.log(findMaxElement(array14));
+
+//======= нові знання відкривають коротший шлях =======
+function findMaxElement_2(arr) {
+  return Math.max(...arr);
+}
+//console.log(findMaxElement_2(array14));
+
+//16. Напиши функцію, яка приймає масив та повертає масив лише з тих елементів, які
+//більші за середнє значення всіх елементів масиву.
+function filterAboveAverage(arr) {
+  let sum = 0;
+  for (let i = 0; i < arr.length; i++) {
+    sum += arr[i];
+  }
+  const result = [];
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] > sum / arr.length) {
+      result.push(arr[i]);
+    }
+  }
+  return result;
+}
+const array16 = [1, 9, 2, 8, 3, 7, 4, 6, 5, 10];
+//console.log(filterAboveAverage(array16));
+
+// 17. Напиши функцію, яка приймає масив та повертає масив лише з тих елементів,
+// які більші за власний індекс.
+function filterAboveIndex(arr) {
+  const res = [];
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] > i) {
+      res.push(arr[i]);
+    }
+  }
+  return res;
+}
+const array17 = [1, 1, 1, 5, 2, 9, 6, 0];
+//console.log(filterAboveIndex(array17));
+
+// 18. Напишіть функцію, яка приймає масив чисел. Функція повинна знайти
+// мінімальний елемент та видалити його з масиву.
+function removeMinElement(arr) {
+  let min = Math.min(...arr);
+  for (let i = 0; i < arr.length; i++) {
+    let index = arr.indexOf(min);
+    if (index >= 0) {
+      arr.splice(index, 1);
+    }
+  }
+  return arr;
+}
+const array18 = [4, -5, 0, -3, 4, -5, 8];
+//console.log(removeMinElement(array18));
+
+// 19. Напиши функцію яка приймає два параметри: start та end. Функція повинна
+// повернути масив, де будуть числа з діапазону, але лише ті, у яких немає
+// цифри 5. До прикладу, числа (51, 25, 15, 256) не підходять, бо містять символ
+// "5" у собі.
+function getArrayWithoutFive(start, end) {
+  const res = [];
+  for (let i = start; i <= end; i++) {
+    const el = String(i);
+    if (!el.includes(5)) {
+      res.push(i);
+    }
+  }
+  return res;
+}
+//console.log(getArrayWithoutFive(-6, 16));
