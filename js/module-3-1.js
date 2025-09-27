@@ -276,3 +276,175 @@ function getArrayWithoutFive(start, end) {
   return res;
 }
 //console.log(getArrayWithoutFive(-6, 16));
+
+//==================================================================================
+//=============================== Складні задачі ===================================
+//==================================================================================
+
+// 20. Напиши функцію, яка приймає массив чисел і повертає новий масив, де всі
+// парні числа переміщені в початок, а всі непарні - в кінець.
+function sortEvenOdd(arr) {
+  const even = [];
+  const odd = [];
+  for (let i = 0; i < arr.length; i++) {
+    const el = arr[i];
+    if (el % 2 === 0) {
+      even.push(el);
+    } else {
+      odd.push(el);
+    }
+  }
+  const res = [].concat(even, odd);
+  return res;
+}
+const array20 = [1, 2, 3, 0, 4, 5, 6, 7, 8, 9];
+//console.log(sortEvenOdd(array20));
+
+function sortEvenOdd_2(arr) {
+  const res = [];
+  for (let i = 0; i < arr.length; i++) {
+    const el = arr[i];
+    if (el % 2 === 0) {
+      res.unshift(el);
+    } else {
+      res.push(el);
+    }
+  }
+  return res;
+}
+//console.log(sortEvenOdd_2(array20));
+
+/* let start, end;
+const experiment = [];
+for (let i = 0; i < 400000; i++) {
+  const random = Math.floor(Math.random() * 1000);
+  experiment.push(random);
+}
+start = Date.now();
+sortEvenOdd(experiment);
+end = Date.now();
+console.log(end - start); // 13
+
+start = Date.now();
+sortEvenOdd_2(experiment);
+end = Date.now();
+console.log(end - start); //5710 */
+
+//21. Напиши функцію, яка приймає массив чисел і повертає новий массив, де кожен
+// елемент є сумою усіх попередніх елементів.
+function cumulativeSumArray(arr) {
+  const res = [];
+  let sum = 0;
+  for (let i = 0; i < arr.length; i++) {
+    sum += arr[i];
+    res.push(sum);
+  }
+  return res;
+}
+const array21 = [1, 1, 1, 1, 1, 1];
+//console.log(cumulativeSumArray(array21));
+
+//22. Напиши функцію, яка приймає массив чисел і повертає новий массив, що містить
+// лише унікальні числа.
+function getUniqueElements(array) {
+  const res = [];
+  for (let i = 0; i < array.length; i++) {
+    const element = array[i];
+    if (!res.includes(element)) {
+      res.push(element);
+    }
+  }
+  return res;
+}
+const array22 = [1, 1, 2, 3, 4, 1, 2, 5, 3, 6];
+//console.log(getUniqueElements(array22));
+
+// 23. Напиши функцію, яка приймає два масиви і повертає об'єднаний массив без
+// дублювання елементів.
+function getUniqueElements_23(arr1, arr2) {
+  const array = [].concat(arr1, arr2);
+  const res = [];
+  for (let i = 0; i < array.length; i++) {
+    const element = array[i];
+    if (!res.includes(element)) {
+      res.push(element);
+    }
+  }
+  return res;
+}
+const array23 = [9, 8, 7, 6, 5];
+//console.log(getUniqueElements_23(array22, array23));
+
+//====== варіант з використанням попереднього доробку ======
+function getUniqueElements_23_2(arr1, arr2) {
+  const array = [].concat(arr1, arr2);
+  return getUniqueElements(array);
+}
+//console.log(getUniqueElements_23_2(array22, array23));
+
+//24. Напиши функцію, яка приймає массив чисел і повертає новий массив, де кожен
+// елемент є середньоарифметичним всіх сусідніх елементів.
+function neighborAverages(array) {
+  // що робити з крайніми елементами? Наприклад, (1 + undefined) / 2 = NaN
+  // але тоді масив вже не виключно числовий. Тож приймаю рішення:
+  // надати крайнім елементам значення єдиного сусіда
+  const result = [array[0]];
+  for (let i = 1; i < array.length - 1; i++) {
+    const element = (array[i - 1] + array[i + 1]) / 2;
+    result.push(element);
+  }
+  const lastIndex = array.length - 1;
+  result.push(array[lastIndex]);
+  return result;
+}
+const array24 = [1, 2, 3, 4, 5, -4, 6, 10];
+//console.log(neighborAverages(array24));
+
+// 25. Напиши функцію, яка приймає массив чисел і повертає новий массив, де
+// елементи відсортовані в порядку збільшення або зменшення.
+function findMinElementIndex(arr) {
+  let result = 0;
+  for (let i = 1; i < arr.length; i++) {
+    if (arr[i] < arr[result]) {
+      result = i;
+    }
+  }
+  return result;
+}
+
+function sortAsc(arr) {
+  const toSort = [...arr];
+  const result = [];
+  while (toSort.length > 0) {
+    const index = findMinElementIndex(toSort);
+    result.push(toSort[index]);
+    toSort.splice(index, 1);
+  }
+  return result;
+}
+const array25 = [6, 3, -4, 1, 2, -9, 8, 7, 7, 5];
+//console.log(sortAsc(array25));
+
+// 26. Напиши функцію, яка приймає массив рядочків та сортує їх за довжиною
+// елементів.
+function findShortestElementIndex(arr) {
+  let result = 0;
+  for (let i = 1; i < arr.length; i++) {
+    if (arr[i].length < arr[result].length) {
+      result = i;
+    }
+  }
+  return result;
+}
+function sortLengthAsc(arr) {
+  const toSort = [...arr];
+  arr.length = 0;
+  while (toSort.length > 0) {
+    const index = findShortestElementIndex(toSort);
+    arr.push(toSort[index]);
+    toSort.splice(index, 1);
+  }
+}
+const array26 = [',', 'gfd', 'dfghfhh', '', 'sgsdgsdgsdg'];
+sortLengthAsc(array26);
+//console.log(array26);
