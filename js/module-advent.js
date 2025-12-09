@@ -57,4 +57,62 @@ function findUniqueToy4(toy) {
   return index >= 0 ? toy[index] : '';
 }
 
-console.log(findUniqueToy4('AcbbCafGG'));
+// console.log(findUniqueToy4('AcbbCafGG'));
+
+// ========================= Challenge 9: the Reno robot aspirator =========================
+
+const board = `
+.....
+.*#.*
+.@...
+.....
+`;
+
+// console.log(moveReno(board, 'D')); // ➞ 'fail' -> it moves but doesn’t pick anything up
+// console.log(moveReno(board, 'U')); // ➞ 'success' -> it picks something up (*) just above
+// console.log(moveReno(board, 'RU')); // ➞ 'crash' -> it crashes into an obstacle (#)
+// console.log(moveReno(board, 'RRRUU')); // ➞ 'success' -> it picks something up (*)
+// console.log(moveReno(board, 'DD')); // ➞ 'crash' -> it crashes into the bottom of the board
+// console.log(moveReno(board, 'UUU')); // ➞ 'success' -> it picks something up from the floor (*) and then crashes at the top
+// console.log(moveReno(board, 'RR')); // ➞ 'fail' -> it moves but doesn’t pick anything up
+
+function moveReno(board, moves) {
+  const B = board.slice(1, board.length - 1).split('\n');
+  const bottomEdgeRow = B.length - 1;
+  let deer = { x: 0, y: 0 };
+
+  for (let y = 0; y <= bottomEdgeRow; y++) {
+    const i = B[y].indexOf('@');
+    if (i !== -1) {
+      deer = { x: i, y };
+      break;
+    }
+  }
+
+  for (let i = 0; i < moves.length; i++) {
+    switch (moves[i]) {
+      case 'U':
+        deer.y -= 1;
+        break;
+      case 'D':
+        deer.y += 1;
+        break;
+      case 'R':
+        deer.x += 1;
+        break;
+      case 'L':
+        deer.x -= 1;
+        break;
+    }
+    const deerY = B[deer.y];
+    const cell = deerY && deerY[deer.x];
+    if (cell === '*') {
+      return 'success';
+    }
+    if (cell === '#' || !cell) {
+      return 'crash';
+    }
+  }
+
+  return 'fail';
+}

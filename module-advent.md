@@ -22,3 +22,22 @@ uppercase) // and the e as well, so the first one is 'i'
 // More cases: findUniqueToy('AaBbCc') // '' findUniqueToy('abcDEF') // 'a'
 findUniqueToy('aAaAaAF') // 'F' findUniqueToy('sTreSS') // 'T'
 findUniqueToy('z') // 'z'
+
+## Challenge 9: the Reno robot aspirator
+
+The elves have built a robot vacuum reindeer 🦌 (@) to tidy up the workshop a
+bit for Christmas.
+
+The reindeer moves on a board to pick things up from the floor (\*) and must
+avoid obstacles (#).
+
+You will receive two parameters:
+
+board: a string that represents the board. moves: a string with the moves: 'L'
+(left), 'R' (right), 'U' (up), 'D' (down). Movement rules:
+
+If the reindeer goes off the board or crashes into an obstacle (#) → return
+'crash'. If the reindeer picks something up from the floor (\*) during the moves
+→ return 'success'. If the reindeer doesn’t pick anything up and doesn’t crash →
+return 'fail'. Important: Keep in mind that in the board the first and last
+lines are blank and must be discarded.
