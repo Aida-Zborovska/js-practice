@@ -41,3 +41,17 @@ If the reindeer goes off the board or crashes into an obstacle (#) → return
 → return 'success'. If the reindeer doesn’t pick anything up and doesn’t crash →
 return 'fail'. Important: Keep in mind that in the board the first and last
 lines are blank and must be discarded.
+
+## Challenge 10: Depth of Christmas Magic
+
+At the North Pole, Santa Claus is reviewing the magical letters 📩✨ he receives
+from children all over the world. These letters use an ancient Christmas
+language in which the brackets [ and ] represent the intensity of the wish.
+
+The deeper the nesting of the brackets, the stronger the wish. Your mission is
+to find out the maximum depth at which the [] are nested.
+
+But be careful! Some letters may be poorly written. If the brackets are not
+properly balanced (if one closes before it opens, there are extra closing
+brackets, or closing brackets are missing), the letter is invalid and you must
+return -1.

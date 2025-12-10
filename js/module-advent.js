@@ -116,3 +116,35 @@ function moveReno(board, moves) {
 
   return 'fail';
 }
+
+// ========================= Challenge 10: Depth of Christmas Magic =========================
+
+function maxDepth(s) {
+  let counter = 0;
+  let max = 0;
+  for (let i = 0; i < s.length; i++) {
+    s[i] === '[' ? counter++ : counter--;
+    if (counter < 0) {
+      return -1;
+    }
+    if (counter > max) {
+      max = counter;
+    }
+  }
+  if (counter !== 0) {
+    return -1;
+  }
+  return max;
+}
+
+// console.log(maxDepth('[]')); // -> 1
+// console.log(maxDepth('[[]]')); // -> 2
+// console.log(maxDepth('[][]')); // -> 1
+// console.log(maxDepth('[[][]]')); // -> 2
+// console.log(maxDepth('[[[]]]')); // -> 3
+// console.log(maxDepth('[][[]][]')); // -> 2
+
+// console.log(maxDepth('][')); // -> -1 (closes before opening)
+// console.log(maxDepth('[[[')); // -> -1 (missing closing brackets)
+// console.log(maxDepth('[]]]')); // -> -1 (extra closing brackets)
+// console.log(maxDepth('[][][')); // -> -1 (one remains unclosed)
