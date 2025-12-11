@@ -148,3 +148,31 @@ function maxDepth(s) {
 // console.log(maxDepth('[[[')); // -> -1 (missing closing brackets)
 // console.log(maxDepth('[]]]')); // -> -1 (extra closing brackets)
 // console.log(maxDepth('[][][')); // -> -1 (one remains unclosed)
+
+// ========================= Challenge 11: Unwatched gifts =========================
+
+// @param {string[]} warehouse - The warehouse layout
+// @returns {number} The count of unwatched gifts
+
+function findUnsafeGifts(warehouse) {
+  let counter = 0;
+  warehouse.unshift('');
+  warehouse.push('');
+  for (let i = 1; i < warehouse.length - 1; i++) {
+    for (let j = 0; j < warehouse[i].length; j++) {
+      if (warehouse[i][j] === '*') {
+        let isSave =
+          warehouse[i - 1][j] === '#' ||
+          warehouse[i + 1][j] === '#' ||
+          warehouse[i][j - 1] === '#' ||
+          warehouse[i][j + 1] === '#';
+        if (!isSave) {
+          counter++;
+        }
+      }
+    }
+  }
+  return counter;
+}
+
+console.log(findUnsafeGifts(['...#....', '..*#*..', '...#....']));
